@@ -36,7 +36,7 @@ After starting the server, it will print QR code in the terminal scan it using y
 Next use web hook as following to send a message,
 
 ```c
-curl localhost:8080/ping \
+curl -X POST localhost:8080/ping \
     -H "Authorization: Bearer $YOUR_API_KEY"
     -d '{
         "message": "hello world",
@@ -50,13 +50,13 @@ using js,
 fetch("http://localhost:8080/ping", {
   headers: {
     Authorization: "Bearer YOUR_KEY",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
   method: "POST",
   body: JSON.stringify({
     message: "hey",
-    number: "<country_code_without_plus><..number>",
-  }),
+    number: "<country_code_without_plus><..number>"
+  })
 })
   .then((res) => res.text())
   .then((res) => console.log(res));
