@@ -12,7 +12,7 @@ const authentication = (req: Request, res: Response, next: NextFunction) => {
   }
 
   if (process.env.API_KEY && apiKey === process.env.API_KEY) {
-    res.status(200).send("ready to go");
+    next();
   } else {
     res.status(401).json({ message: "Unauthorized" });
   }
