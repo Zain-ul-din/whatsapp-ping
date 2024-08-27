@@ -1,6 +1,6 @@
 import makeWASocket, {
   DisconnectReason,
-  useMultiFileAuthState,
+  useMultiFileAuthState
 } from "@whiskeysockets/baileys";
 import { Boom } from "@hapi/boom";
 import * as fs from "fs";
@@ -11,7 +11,7 @@ async function connectToWhatsApp() {
   const sock = makeWASocket({
     // can provide additional config here
     printQRInTerminal: true,
-    auth: state,
+    auth: state
   });
 
   sock.ev.on("creds.update", saveCreds);
@@ -43,7 +43,7 @@ async function connectToWhatsApp() {
             if (lastDisconnect.error) {
               fs.rmSync("./auth_info_baileys", {
                 force: true,
-                recursive: true,
+                recursive: true
               });
             }
           }
