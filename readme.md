@@ -44,6 +44,24 @@ curl localhost:8080/ping \
     }'
 ```
 
+using js,
+
+```js
+fetch("http://localhost:8080/ping", {
+  headers: {
+    Authorization: "Bearer YOUR_KEY",
+    "Content-Type": "application/json",
+  },
+  method: "POST",
+  body: JSON.stringify({
+    message: "hey",
+    number: "<country_code_without_plus><..number>",
+  }),
+})
+  .then((res) => res.text())
+  .then((res) => console.log(res));
+```
+
 ## Caveats
 
 If you plan to deploy this project, it currently works only on VPS and not in a serverless environment. This means you will not be able to deploy it to the Vercel or other serverless providers.
