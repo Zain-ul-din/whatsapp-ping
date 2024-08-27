@@ -1,4 +1,9 @@
-## WhatApp Ping 🔔
+<div align="center">
+
+<h1>
+<img src="https://github.com/Zain-ul-din/whatsapp-ai-bot/assets/78583049/d31339cf-b4ae-450e-95b9-53d21e4641a0" width="35" height="35"/>
+WhatsApp Ping 🔔</h1>
+</div>
 
 Catching messages on Gmail from clients always has me running late, and checking it over and over can be a real drag. That's why I created `whatsapp ping`! It lets me ping myself on WhatsApp using a webhook.
 
