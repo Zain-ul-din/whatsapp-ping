@@ -8,9 +8,11 @@
     "dev": "vite-node --watch ./src/index.ts",
     "start": "vite-node ./src/index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "whatsapp ping"
+  ],
+  "author": "Zain-ul-din",
+  "license": "MIT",
   "devDependencies": {
     "@types/body-parser": "^1.19.5",
     "@types/dotenv": "^8.2.0",
