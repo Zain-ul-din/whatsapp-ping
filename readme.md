@@ -65,7 +65,7 @@ fetch("http://localhost:8080/ping", {
   method: "POST",
   body: JSON.stringify({
     message: "hey",
-    number: "<country_code_without_plus><..number>"
+    number: "<country_code_without_plus><...number>"
   })
 })
   .then((res) => res.text())
