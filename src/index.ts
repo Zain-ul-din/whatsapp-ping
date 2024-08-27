@@ -1,9 +1,12 @@
 import express from "express";
 import { pingRoute } from "./routes";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+dotenv.config();
 
 app.use(bodyParser.json());
 app.use(pingRoute);
