@@ -8,9 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@hapi/boom':
+        specifier: ^10.0.1
+        version: 10.0.1
       '@whiskeysockets/baileys':
         specifier: ^6.7.7
-        version: 6.7.7
+        version: 6.7.7(qrcode-terminal@0.12.0)
       body-parser:
         specifier: ^1.20.2
         version: 1.20.2
@@ -23,6 +26,9 @@ importers:
       express-rate-limit:
         specifier: ^7.4.0
         version: 7.4.0(express@4.19.2)
+      qrcode-terminal:
+        specifier: ^0.12.0
+        version: 0.12.0
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -186,8 +192,14 @@ packages:
   '@eshaz/web-worker@1.2.2':
     resolution: {integrity: sha512-WxXiHFmD9u/owrzempiDlBB1ZYqiLnm9s6aPc8AlFQalq2tKmqdmMr9GXOupDgzXtqnBipj8Un0gkIm7Sjf8mw==}
 
+  '@hapi/boom@10.0.1':
+    resolution: {integrity: sha512-ERcCZaEjdH3OgSJlyjVk8pHIFeus91CjKP3v+MpgBNp5IvGzP2l/bRiD78nqYcKPaZdbKkK5vDBVPd2ohHBlsA==}
+
   '@hapi/boom@9.1.4':
     resolution: {integrity: sha512-Ls1oH8jaN1vNsqcaHVYJrKmgMcKsC1wcp8bujvXrHaAqD2iDYq3HoOwsxwo09Cuda5R5nC0o0IxlrlTuvPuzSw==}
+
+  '@hapi/hoek@11.0.4':
+    resolution: {integrity: sha512-PnsP5d4q7289pS2T2EgGz147BFJ2Jpb4yrEdkpz2IhgEUzos1S7HTl7ezWh1yfYzYlj89KzLdCRkqsP6SIryeQ==}
 
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -790,6 +802,10 @@ packages:
   qoa-format@1.0.1:
     resolution: {integrity: sha512-dMB0Z6XQjdpz/Cw4Rf6RiBpQvUSPCfYlQMWvmuWlWkAT7nDQD29cVZ1SwDUB6DYJSitHENwbt90lqfI+7bvMcw==}
 
+  qrcode-terminal@0.12.0:
+    resolution: {integrity: sha512-EXtzRZmC+YGmGlDFbXKxQiMZNwCLEO6BANKXG4iCtSIM0yqc/pappSx3RIKr4r0uh5JsBckOXeKrB3Iz7mdQpQ==}
+    hasBin: true
+
   qs@6.11.0:
     resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
     engines: {node: '>=0.6'}
@@ -1049,9 +1065,15 @@ snapshots:
 
   '@eshaz/web-worker@1.2.2': {}
 
+  '@hapi/boom@10.0.1':
+    dependencies:
+      '@hapi/hoek': 11.0.4
+
   '@hapi/boom@9.1.4':
     dependencies:
       '@hapi/hoek': 9.3.0
+
+  '@hapi/hoek@11.0.4': {}
 
   '@hapi/hoek@9.3.0': {}
 
@@ -1209,7 +1231,7 @@ snapshots:
       '@wasm-audio-decoders/common': 9.0.5
       codec-parser: 2.4.3
 
-  '@whiskeysockets/baileys@6.7.7':
+  '@whiskeysockets/baileys@6.7.7(qrcode-terminal@0.12.0)':
     dependencies:
       '@adiwajshing/keyed-db': 0.2.4
       '@hapi/boom': 9.1.4
@@ -1227,6 +1249,8 @@ snapshots:
       protobufjs: 7.4.0
       uuid: 10.0.0
       ws: 8.18.0
+    optionalDependencies:
+      qrcode-terminal: 0.12.0
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -1687,6 +1711,8 @@ snapshots:
   qoa-format@1.0.1:
     dependencies:
       '@thi.ng/bitstream': 2.4.0
+
+  qrcode-terminal@0.12.0: {}
 
   qs@6.11.0:
     dependencies:
