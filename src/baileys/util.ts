@@ -27,6 +27,7 @@ export const decryptAuthState = (folderPath: string) => {
         "utf-8"
       );
     } catch (err) {
+      console.log(err);
       writeFileSync(
         filePath,
         JSON.stringify(JSON.parse(encryptedContent)),
