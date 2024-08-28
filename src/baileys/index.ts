@@ -16,10 +16,6 @@ async function connectToWhatsApp() {
 
   sock.ev.on("creds.update", saveCreds);
 
-  sock.ev.on("messages.upsert", (message) => {
-    console.log(message.messages[0].key.remoteJid);
-  });
-
   const setupAuth = new Promise(async (resolve, rej) => {
     sock.ev.on("connection.update", (update) => {
       const { connection, lastDisconnect } = update;
