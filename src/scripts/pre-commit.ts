@@ -6,13 +6,19 @@ dotenv.config();
 
 import path from "path";
 import { encrypt } from "../lib/cipher";
-import { readdirSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "fs";
 
 const folderPath = "/auth_info_baileys";
 const dirPath = path.join(process.cwd(), folderPath);
 
+if (!existsSync(dirPath)) {
+  console.log(`directory ${folderPath} doesn't exists`);
+  process.exit(0);
+}
+
 readdirSync(dirPath).forEach((file) => {
   const filePath = path.join(dirPath, file);
+
   const fileContent = readFileSync(filePath, "utf-8");
   try {
     JSON.parse(fileContent);

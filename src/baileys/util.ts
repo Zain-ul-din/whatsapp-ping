@@ -1,9 +1,10 @@
 import path from "path";
-import { readdirSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "fs";
 import { decrypt, encrypt } from "../lib/cipher";
 
 export const encryptAuthState = (folderPath: string) => {
   const dirPath = path.join(process.cwd(), folderPath);
+  if (!existsSync(dirPath)) return;
   readdirSync(dirPath).forEach((file) => {
     const filePath = path.join(dirPath, file);
     const fileContent = readFileSync(filePath, "utf-8");
@@ -14,6 +15,7 @@ export const encryptAuthState = (folderPath: string) => {
 
 export const decryptAuthState = (folderPath: string) => {
   const dirPath = path.join(process.cwd(), folderPath);
+  if (!existsSync(dirPath)) return;
   readdirSync(dirPath).forEach((file) => {
     const filePath = path.join(dirPath, file);
     const encryptedContent = readFileSync(filePath, "utf-8");
