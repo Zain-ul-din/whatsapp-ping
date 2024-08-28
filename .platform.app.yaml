@@ -13,8 +13,6 @@ type: nodejs:20
 # to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
 # side is in the form `<service name>:<endpoint name>`.
 # More information: https://docs.platform.sh/create-apps/app-reference.html#relationships
-relationships:
-  # database: "db:mysql"
 
 # The size of the persistent disk of the application (in MB). Minimum value is 128.
 disk: 512
@@ -40,7 +38,3 @@ source:
   ##                  YOU CAN SAFELY DELETE THIS COMMENT AND THE LINES BENEATH IT                                     ##
   ##                                                                                                                  ##
   ######################################################################################################################
-  operations:
-    auto-update:
-      command: |
-        curl -fsS https://raw.githubusercontent.com/platformsh/source-operations/main/setup.sh | { bash /dev/fd/3 sop-autoupdate; } 3<&0
