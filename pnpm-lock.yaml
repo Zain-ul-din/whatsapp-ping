@@ -32,6 +32,9 @@ importers:
       qrcode-terminal:
         specifier: ^0.12.0
         version: 0.12.0
+      whatsapp-ping:
+        specifier: 'file:'
+        version: 'file:'
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -48,6 +51,9 @@ importers:
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.21
+      husky:
+        specifier: ^9.1.5
+        version: 9.1.5
       vite-node:
         specifier: ^2.0.5
         version: 2.0.5(@types/node@22.5.0)
@@ -649,6 +655,11 @@ packages:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
     engines: {node: '>= 0.8'}
 
+  husky@9.1.5:
+    resolution: {integrity: sha512-rowAVRUBfI0b4+niA4SJMhfQwc107VLkBUgEYYAOQAbqDCnra1nYh83hF/MDmhYs9t9n1E3DuKOrs2LYNC+0Ag==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -988,6 +999,9 @@ packages:
         optional: true
       terser:
         optional: true
+
+  'whatsapp-ping@file:':
+    resolution: {directory: '', type: directory}
 
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
@@ -1565,6 +1579,8 @@ snapshots:
       statuses: 2.0.1
       toidentifier: 1.0.1
 
+  husky@9.1.5: {}
+
   iconv-lite@0.4.24:
     dependencies:
       safer-buffer: 2.1.2
@@ -1921,6 +1937,26 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.5.0
       fsevents: 2.3.3
+
+  'whatsapp-ping@file:':
+    dependencies:
+      '@hapi/boom': 10.0.1
+      '@whiskeysockets/baileys': 6.7.7(qrcode-terminal@0.12.0)
+      body-parser: 1.20.2
+      cors: 2.8.5
+      dotenv: 16.4.5
+      express: 4.19.2
+      express-rate-limit: 7.4.0(express@4.19.2)
+      qrcode-terminal: 0.12.0
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - jimp
+      - link-preview-js
+      - sharp
+      - supports-color
+      - utf-8-validate
 
   wrappy@1.0.2: {}
 
