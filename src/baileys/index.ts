@@ -7,9 +7,11 @@ import * as fs from "fs";
 import { decryptAuthState } from "./util";
 
 async function connectToWhatsApp() {
-  decryptAuthState("/auth_info_baileys", "/tmp");
+  decryptAuthState("/auth_info_baileys");
 
-  const { state, saveCreds } = await useMultiFileAuthState("tmp");
+  const { state, saveCreds } = await useMultiFileAuthState(
+    "/auth_info_baileys"
+  );
 
   console.log(JSON.stringify(state));
 
