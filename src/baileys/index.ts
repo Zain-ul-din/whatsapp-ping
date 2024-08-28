@@ -6,11 +6,10 @@ import { Boom } from "@hapi/boom";
 import * as fs from "fs";
 import { decryptAuthState, encryptAuthState } from "./util";
 
-decryptAuthState("/auth_info_baileys");
-
-const { state, saveCreds } = await useMultiFileAuthState("auth_info_baileys");
-
 async function connectToWhatsApp() {
+  decryptAuthState("/auth_info_baileys");
+  const { state, saveCreds } = await useMultiFileAuthState("auth_info_baileys");
+
   const sock = makeWASocket({
     // can provide additional config here
     printQRInTerminal: true,
