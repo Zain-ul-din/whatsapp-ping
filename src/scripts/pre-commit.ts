@@ -9,6 +9,10 @@ import { encrypt } from "../lib/cipher";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "fs";
 import { exec } from "child_process";
 
+if (process.env.ENVIRONMENT === "production") {
+  process.exit(0);
+}
+
 const folderPath = "/auth_info_baileys";
 const dirPath = path.join(process.cwd(), folderPath);
 
