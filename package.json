@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vite-node ./src/test/index.ts",
     "dev": "vite-node --watch ./src/index.ts",
     "start": "vite-node ./src/index.ts"
   },
