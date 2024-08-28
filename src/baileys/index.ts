@@ -66,7 +66,7 @@ async function connectToWhatsApp() {
     )
   ]);
 
-  encryptAuthState("/auth_info_baileys");
+  // encryptAuthState("/auth_info_baileys");
 
   return sock;
 }
