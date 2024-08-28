@@ -20,7 +20,7 @@ async function connectToWhatsApp() {
     console.log(message.messages[0].key.remoteJid);
   });
 
-  await new Promise(async (resolve, rej) => {
+  const setupAuth = new Promise(async (resolve, rej) => {
     sock.ev.on("connection.update", (update) => {
       const { connection, lastDisconnect } = update;
       try {
@@ -56,6 +56,16 @@ async function connectToWhatsApp() {
       }
     });
   });
+
+  await Promise.race([
+    setupAuth,
+    new Promise((_, rej) =>
+      setTimeout(
+        () => rej("Timeout while setting up connection to whatsapp"),
+        1000 * 30
+      )
+    )
+  ]);
 
   return sock;
 }
