@@ -7,7 +7,7 @@
     "test": "vite-node ./src/test/index.ts",
     "dev": "vite-node --watch ./src/index.ts",
     "start": "vite-node ./src/index.ts",
-    "prepare": "ts-node ./src/scripts/pre-commit.ts"
+    "prepare": "vite-node ./src/scripts/pre-commit.ts"
   },
   "keywords": [
     "whatsapp ping"
