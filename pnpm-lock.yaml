@@ -29,6 +29,9 @@ importers:
       express-rate-limit:
         specifier: ^7.4.0
         version: 7.4.0(express@4.19.2)
+      platformsh-config:
+        specifier: ^2.4.1
+        version: 2.4.1
       qrcode-terminal:
         specifier: ^0.12.0
         version: 0.12.0
@@ -804,6 +807,9 @@ packages:
   pino@7.11.0:
     resolution: {integrity: sha512-dMACeu63HtRLmCG8VKdy4cShCPKaYDR4youZqoSWLxl5Gu99HUw8bw75thbPv9Nip+H+QYX8o3ZJbTdVZZ2TVg==}
     hasBin: true
+
+  platformsh-config@2.4.1:
+    resolution: {integrity: sha512-7uiWcjhP0Q7/MDBpdcaZG5X4lCMXcU1va9h4yJZyAAtMpHZoogd/C/+5ucc94z3W40FJwf07MO5p15ZrGzDfQA==}
 
   postcss@8.4.41:
     resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
@@ -1705,6 +1711,8 @@ snapshots:
       safe-stable-stringify: 2.5.0
       sonic-boom: 2.8.0
       thread-stream: 0.15.2
+
+  platformsh-config@2.4.1: {}
 
   postcss@8.4.41:
     dependencies:
