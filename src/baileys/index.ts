@@ -58,7 +58,7 @@ async function connectToWhatsApp() {
     new Promise((_, rej) =>
       setTimeout(
         () => rej("Timeout while setting up connection to whatsapp"),
-        1000 * 30
+        1000 * 60
       )
     )
   ]);
