@@ -4,6 +4,9 @@ import makeWASocket, {
 } from "@whiskeysockets/baileys";
 import { Boom } from "@hapi/boom";
 import * as fs from "fs";
+import { decryptAuthState, encryptAuthState } from "./util";
+
+decryptAuthState("/auth_info_baileys");
 
 const { state, saveCreds } = await useMultiFileAuthState("auth_info_baileys");
 
@@ -62,6 +65,8 @@ async function connectToWhatsApp() {
       )
     )
   ]);
+
+  encryptAuthState("/auth_info_baileys");
 
   return sock;
 }

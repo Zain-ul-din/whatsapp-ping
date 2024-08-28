@@ -20,6 +20,6 @@ export function decrypt(data: string) {
   const { key, iv } = getCredentials();
   const decipher = createDecipheriv(CIPHER_ALGO, key, iv);
   let decrypted = decipher.update(data, ENCRYPTED_DATA_ENCODING, "utf8");
-  decrypted += decipher.final("utf8");
+  decrypted += decipher.final("utf-8");
   return decrypted;
 }

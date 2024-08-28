@@ -3,3 +3,5 @@
 .env
 
 /auth_info_baileys
+
+package.lock.json
