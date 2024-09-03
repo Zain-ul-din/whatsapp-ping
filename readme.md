@@ -25,7 +25,7 @@ clone or fork the repo and install all dependencies using your favorite package 
 pnpm i
 ```
 
-Prepare environment variables,
+**Prepare environment variables:**
 
 We use `api-key` for authentication you can use any key you like to use but we recommend using strong key that is not vulnerable to `brute-force` attack.
 
@@ -33,7 +33,15 @@ We use `api-key` for authentication you can use any key you like to use but we r
 openssl rand -base64 256
 ```
 
-start the server using following command,
+To run this bot in a serverless environment, we use MongoDB to manage the authentication state.
+
+You can Get the MongoDB URL for free from their [website](https://www.mongodb.com/).
+
+```
+mongodb+srv://<user_name>:<password>@cluster0.usggwa4.mongodb.net/?retryWrites=true&w=majority
+```
+
+**start the server using the following command:**
 
 ```bash
 pnpm dev # start development server
@@ -42,6 +50,8 @@ pnpm start # start server in production
 ```
 
 After starting the server, it will print QR code in the terminal scan it using your phone to connect whatsapp.
+
+### ⚓ Web Hook Usage
 
 Next use web hook as following to send a message,
 
@@ -74,9 +84,17 @@ fetch("http://localhost:8080/ping", {
 
 ### Caveats
 
-If you plan to deploy this project, it currently works only on VPS and not in a serverless environment. This means you will not be able to deploy it to the Vercel or other serverless providers.
+```diff
+- If you plan to deploy this project, it currently works only on VPS and not in a serverless environment. This means you will not be able to deploy it to the Vercel or other serverless providers.
++ We just added support for serverless deployment https://github.com/Zain-ul-din/whatsapp-ping/issues/2
+```
 
 <br>
+
+#### Special thanks to these projects for making this possible:
+
+- [@whiskeysockets/baileys](https://www.npmjs.com/package/@whiskeysockets/baileys)
+- [mongo-baileys](https://www.npmjs.com/package/mongo-baileys)
 
 ---
 
