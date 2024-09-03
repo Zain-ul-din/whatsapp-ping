@@ -37,7 +37,7 @@ To run this bot in a serverless environment, we use MongoDB to manage the authen
 
 You can Get the MongoDB URL for free from their [website](https://www.mongodb.com/).
 
-```
+```js
 mongodb+srv://<user_name>:<password>@cluster0.usggwa4.mongodb.net/?retryWrites=true&w=majority
 ```
 
