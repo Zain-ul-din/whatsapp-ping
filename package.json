@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "vite-node ./src/test/index.ts",
-    "dev": "vite-node --watch ./src/index.ts",
+    "dev": "vite-node --watch api/index.ts",
     "start": "vite-node api/index.ts"
   },
   "keywords": [
