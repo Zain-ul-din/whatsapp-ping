@@ -29,9 +29,6 @@ importers:
       express-rate-limit:
         specifier: ^7.4.0
         version: 7.4.0(express@4.19.2)
-      platformsh-config:
-        specifier: ^2.4.1
-        version: 2.4.1
       qrcode-terminal:
         specifier: ^0.12.0
         version: 0.12.0
@@ -1955,6 +1952,7 @@ snapshots:
       dotenv: 16.4.5
       express: 4.19.2
       express-rate-limit: 7.4.0(express@4.19.2)
+      platformsh-config: 2.4.1
       qrcode-terminal: 0.12.0
       zod: 3.23.8
     transitivePeerDependencies:
