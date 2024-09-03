@@ -57,12 +57,14 @@ async function connectToWhatsApp() {
     });
   });
 
+  const FIVE_MIN_IN_MS = 1000 * 60  * 5;
+
   await Promise.race([
     setupAuth,
     new Promise((_, rej) =>
       setTimeout(
         () => rej("Timeout while setting up connection to whatsapp"),
-        1000 * 60
+        FIVE_MIN_IN_MS
       )
     )
   ]);
