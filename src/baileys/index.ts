@@ -4,14 +4,13 @@ import makeWASocket, {
 } from "@whiskeysockets/baileys";
 import { Boom } from "@hapi/boom";
 import * as fs from "fs";
+import { connectDB } from "./db";
+import { useMongoDBAuthState } from 'mongo-baileys';
 
 async function connectToWhatsApp() {
 
-  const { state, saveCreds } = await useMultiFileAuthState(
-    "/auth_info_baileys"
-  );
-
-  console.log(JSON.stringify(state));
+  const { collection } = await connectDB();
+  const { state, saveCreds } = await useMongoDBAuthState(collection as any);
 
   const sock = makeWASocket({
     // can provide additional config here
@@ -20,7 +19,7 @@ async function connectToWhatsApp() {
   });
 
   sock.ev.on("creds.update", saveCreds);
-
+  
   const setupAuth = new Promise(async (resolve, rej) => {
     sock.ev.on("connection.update", (update) => {
       const { connection, lastDisconnect } = update;
