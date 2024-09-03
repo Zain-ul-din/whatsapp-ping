@@ -51,9 +51,6 @@ importers:
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.21
-      husky:
-        specifier: ^9.1.5
-        version: 9.1.5
       vite-node:
         specifier: ^2.0.5
         version: 2.0.5(@types/node@22.5.0)
@@ -655,11 +652,6 @@ packages:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
     engines: {node: '>= 0.8'}
 
-  husky@9.1.5:
-    resolution: {integrity: sha512-rowAVRUBfI0b4+niA4SJMhfQwc107VLkBUgEYYAOQAbqDCnra1nYh83hF/MDmhYs9t9n1E3DuKOrs2LYNC+0Ag==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -804,9 +796,6 @@ packages:
   pino@7.11.0:
     resolution: {integrity: sha512-dMACeu63HtRLmCG8VKdy4cShCPKaYDR4youZqoSWLxl5Gu99HUw8bw75thbPv9Nip+H+QYX8o3ZJbTdVZZ2TVg==}
     hasBin: true
-
-  platformsh-config@2.4.1:
-    resolution: {integrity: sha512-7uiWcjhP0Q7/MDBpdcaZG5X4lCMXcU1va9h4yJZyAAtMpHZoogd/C/+5ucc94z3W40FJwf07MO5p15ZrGzDfQA==}
 
   postcss@8.4.41:
     resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
@@ -1582,8 +1571,6 @@ snapshots:
       statuses: 2.0.1
       toidentifier: 1.0.1
 
-  husky@9.1.5: {}
-
   iconv-lite@0.4.24:
     dependencies:
       safer-buffer: 2.1.2
@@ -1708,8 +1695,6 @@ snapshots:
       safe-stable-stringify: 2.5.0
       sonic-boom: 2.8.0
       thread-stream: 0.15.2
-
-  platformsh-config@2.4.1: {}
 
   postcss@8.4.41:
     dependencies:
@@ -1952,7 +1937,6 @@ snapshots:
       dotenv: 16.4.5
       express: 4.19.2
       express-rate-limit: 7.4.0(express@4.19.2)
-      platformsh-config: 2.4.1
       qrcode-terminal: 0.12.0
       zod: 3.23.8
     transitivePeerDependencies:
