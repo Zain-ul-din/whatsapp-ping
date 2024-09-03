@@ -91,7 +91,7 @@ fetch("http://localhost:8080/ping", {
 
 <br>
 
-#### Special thanks to these projects for making this possible:
+#### Thanks to These Awesome Projects:
 
 - [@whiskeysockets/baileys](https://www.npmjs.com/package/@whiskeysockets/baileys)
 - [mongo-baileys](https://www.npmjs.com/package/mongo-baileys)
