@@ -6,3 +6,5 @@ package-lock.json
 .vercel
 
 /tmp
+
+/auth_info_baileys
