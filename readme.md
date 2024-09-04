@@ -7,7 +7,7 @@ WhatsApp Ping 🔔</h1>
 
 Catching messages on Gmail from clients always has me running late, and checking it over and over can be a real drag. That's why I created `whatsapp ping`! It lets me ping myself on WhatsApp using a webhook.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://github.com/Zain-ul-din/whatsapp-ping)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Zain-ul-din/whatsapp-ping)
 
 ### Use Cases
 
