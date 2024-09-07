@@ -8,8 +8,9 @@ import { connectDB } from "./db";
 import { useMongoDBAuthState } from "mongo-baileys";
 
 async function connectToWhatsApp() {
-  const { collection } = await connectDB();
-  const { state, saveCreds } = await useMongoDBAuthState(collection as any);
+  const { state, saveCreds } = process.env.MONGO_URL
+    ? await useMongoDBAuthState((await connectDB()).collection as any)
+    : await useMultiFileAuthState("auth_info_baileys");
 
   const sock = makeWASocket({
     // can provide additional config here
