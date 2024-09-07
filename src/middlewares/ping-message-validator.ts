@@ -11,7 +11,7 @@ const pingMessageSchema = z.object({
     .regex(
       /^\d{12}$/,
       "Invalid phone number. correct number example 123456789012"
-    ),
+    )
 });
 
 const validatePingMessage = (
