@@ -5,13 +5,17 @@ const pingMessageSchema = z.object({
   message: z
     .string()
     .min(1, "Message is required and must be a non-empty string"),
-  number: z
-    .string()
-    .min(12, "number length must be 12")
-    .regex(
-      /^\d{12}$/,
-      "Invalid phone number. correct number example 123456789012"
+  numbers: z
+    .array(
+      z
+        .string()
+        .min(12, "Each number must be at least 12 characters long")
+        .regex(
+          /^\d{12}$/,
+          "Invalid phone number format. Correct example: 123456789012"
+        )
     )
+    .max(5, "You can provide a maximum of 5 phone numbers")
 });
 
 const validatePingMessage = (
