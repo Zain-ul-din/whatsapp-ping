@@ -69,7 +69,7 @@ curl -X POST localhost:8080/ping \
     -H "Authorization: Bearer $YOUR_API_KEY"
     -d '{
         "message": "hello world",
-        "number": "123456789012"
+        "numbers": ["123456789012"]
     }'
 ```
 
@@ -84,7 +84,7 @@ fetch("http://localhost:8080/ping", {
   method: "POST",
   body: JSON.stringify({
     message: "hey",
-    number: "<country_code_without_plus><...number>"
+    numbers: ["<country_code_without_plus><...number>"]
   })
 })
   .then((res) => res.text())
