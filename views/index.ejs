@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whats-App-Ping</title>
+    <link href="/global.css" rel="stylesheet" />
+    <style>
+      .charming-header {
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        color: white;
+        border-radius: 0 0 10px 10px;
+      }
+    </style>
+  </head>
+  <body class="bg-background p-2">
+    <!-- Header -->
+    <!-- <header class="charming-header flex justify-between items-center p-4">
+        <div>
+            <h1 class="text-2xl font-bold">Whats-App-Ping</h1>
+            <p class="text-lg">Send messages effortlessly!</p>
+        </div>
+        <a href="https://github.com/your-repo" target="_blank" class="text-primary text-2xl hover:text-primary-foreground">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v9m0 0l3 3m-3-3l-3 3" />
+            </svg>
+        </a>
+    </header> -->
+
+    <header class="max-w-4xl mx-auto mt-8 p-6 bg-card border">
+      <div class="w-full flex items-center">
+        <h1 class="text-2xl font-medium flex uppercase items-center">
+          🔔 Whats App Ping
+        </h1>
+        <a
+          class="ml-auto"
+          href="https://github.com/Zain-ul-din/whatsapp-ping"
+          target="_blank"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 496 512"
+          >
+            <path
+              fill="black"
+              d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
+            />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main
+      class="max-w-4xl mx-auto p-6 bg-card shadow-md rounded-lg rounded-t-none"
+    >
+      <form class="space-y-6" id="message-form">
+        <!-- Token Input -->
+        <div class="flex flex-col">
+          <label for="token" class="text-lg font-semibold mb-2 text-foreground"
+            >Enter your Token:</label
+          >
+          <input
+            type="text"
+            id="token"
+            placeholder="Your token here"
+            class="p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
+          />
+        </div>
+
+        <!-- CSV File Input -->
+        <div class="flex flex-col">
+          <label
+            for="csv-file"
+            class="text-lg font-semibold mb-2 text-foreground"
+            >Upload CSV File:</label
+          >
+          <input
+            type="file"
+            id="csv-file"
+            accept=".csv"
+            class="p-3 border border-border rounded-lg"
+          />
+        </div>
+
+        <details class="transition-all duration-150">
+          <summary>Example</summary>
+          <pre class="m-2 border p-2 px-4 transition-all duration-150">
+Example: 
+
+phone_number 
+1234567890 
+0987654321 
+1122334455
+          </pre>
+        </details>
+
+        <!-- Message Input -->
+        <div class="flex flex-col">
+          <label
+            for="message"
+            class="text-lg font-semibold mb-2 text-foreground"
+            >Compose Your Message:</label
+          >
+          <textarea
+            id="message"
+            rows="4"
+            placeholder="Type your message here..."
+            class="p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
+          ></textarea>
+        </div>
+
+        <!-- Send Button -->
+        <div>
+          <button
+            type="button"
+            onclick="sendMessage()"
+            class="w-full bg-primary text-primary-foreground py-3 rounded-lg hover:bg-primary/80 hover:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          >
+            Send
+          </button>
+        </div>
+      </form>
+
+      <!-- Phone Numbers Table -->
+      <div class="mt-8 overflow-x-auto">
+        <table
+          id="phone-table"
+          class="min-w-full bg-card border border-border rounded-lg shadow-md hidden"
+        >
+          <thead class="bg-background border-b border-border">
+            <tr>
+              <th
+                class="py-3 px-4 text-left text-sm font-semibold text-foreground"
+              >
+                Phone Number
+              </th>
+              <th
+                class="py-3 px-4 text-left text-sm font-semibold text-foreground"
+              >
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody id="phone-table-body">
+            <!-- Table rows will be inserted here by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- JavaScript for Handling CSV File and Table -->
+    <script>
+      document
+        .getElementById("csv-file")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file && file.type === "text/csv") {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const text = e.target.result;
+              const rows = text.split("\n").slice(1); // Skip header row
+              const tableBody = document.getElementById("phone-table-body");
+              tableBody.innerHTML = ""; // Clear previous rows
+
+              rows.forEach((row) => {
+                if (row.trim()) {
+                  const cells = row.split(",");
+                  const phoneNumber = cells[0].trim();
+                  const rowElement = document.createElement("tr");
+                  rowElement.innerHTML = `
+                                <td class="py-3 px-4 text-foreground">${phoneNumber}</td>
+                                <td class="py-3 px-4">
+                                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full text-yellow-800 bg-yellow-200">Pending</span>
+                                </td>
+                            `;
+                  tableBody.appendChild(rowElement);
+                }
+              });
+
+              document.getElementById("phone-table").classList.remove("hidden");
+            };
+            reader.readAsText(file);
+          } else {
+            alert("Please upload a valid CSV file.");
+          }
+        });
+
+      function sendMessage() {
+        // Implement the message sending logic here
+        alert("Messages sent!");
+      }
+    </script>
+  </body>
+</html>
