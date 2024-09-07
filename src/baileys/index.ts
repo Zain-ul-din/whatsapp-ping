@@ -5,24 +5,29 @@ import makeWASocket, {
 import { Boom } from "@hapi/boom";
 import * as fs from "fs";
 import { connectDB } from "./db";
-import { useMongoDBAuthState } from 'mongo-baileys';
+import { useMongoDBAuthState } from "mongo-baileys";
 
 async function connectToWhatsApp() {
-
   const { collection } = await connectDB();
   const { state, saveCreds } = await useMongoDBAuthState(collection as any);
 
   const sock = makeWASocket({
     // can provide additional config here
     printQRInTerminal: true,
+    mobile: false,
+    keepAliveIntervalMs: 10000,
+    syncFullHistory: false,
+    markOnlineOnConnect: true,
+    defaultQueryTimeoutMs: undefined,
     auth: state
   });
 
   sock.ev.on("creds.update", saveCreds);
-  
+
   const setupAuth = new Promise(async (resolve, rej) => {
     sock.ev.on("connection.update", (update) => {
       const { connection, lastDisconnect } = update;
+
       try {
         if (connection === "close" && lastDisconnect) {
           const shouldReconnect =
@@ -57,7 +62,7 @@ async function connectToWhatsApp() {
     });
   });
 
-  const FIVE_MIN_IN_MS = 1000 * 60  * 5;
+  const FIVE_MIN_IN_MS = 1000 * 60 * 5;
 
   await Promise.race([
     setupAuth,
@@ -68,7 +73,6 @@ async function connectToWhatsApp() {
       )
     )
   ]);
-
 
   return sock;
 }
