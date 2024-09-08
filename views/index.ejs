@@ -14,19 +14,6 @@
     </style>
   </head>
   <body class="bg-background p-2">
-    <!-- Header -->
-    <!-- <header class="charming-header flex justify-between items-center p-4">
-        <div>
-            <h1 class="text-2xl font-bold">Whats-App-Ping</h1>
-            <p class="text-lg">Send messages effortlessly!</p>
-        </div>
-        <a href="https://github.com/your-repo" target="_blank" class="text-primary text-2xl hover:text-primary-foreground">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v9m0 0l3 3m-3-3l-3 3" />
-            </svg>
-        </a>
-    </header> -->
-
     <header class="max-w-4xl mx-auto mt-8 p-6 bg-card border">
       <div class="w-full flex items-center">
         <h1 class="text-2xl font-medium flex uppercase items-center">
@@ -170,10 +157,11 @@ phone_number
                   const cells = row.split(",");
                   const phoneNumber = cells[0].trim();
                   const rowElement = document.createElement("tr");
+                  rowElement.setAttribute("data-status", "pending");
                   rowElement.innerHTML = `
                                 <td class="py-3 px-4 text-foreground">${phoneNumber}</td>
                                 <td class="py-3 px-4">
-                                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full text-yellow-800 bg-yellow-200">Pending</span>
+                                  <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full text-yellow-800 bg-yellow-200">Pending</span>
                                 </td>
                             `;
                   tableBody.appendChild(rowElement);
@@ -188,9 +176,71 @@ phone_number
           }
         });
 
+      const chunkifyArray = (arr, size) => {
+        const newArr = [];
+
+        for (let i = 0; i < arr.length; i += size) {
+          newArr.push(arr.slice(i, i + size));
+        }
+
+        return newArr;
+      };
+
+      const delay = (ms) => new Promise((r) => setTimeout(r, ms));
+
       function sendMessage() {
-        // Implement the message sending logic here
-        alert("Messages sent!");
+        // get all pending numbers
+        const rows = Array.from(
+          document.querySelectorAll('[data-status="pending"]')
+        );
+        const chunkSize = 5;
+        const chunks = chunkifyArray(rows, chunkSize);
+
+        (async () => {
+          const token = document.querySelector("#token").value;
+          const msg = document.querySelector("#message").value;
+
+          for (let chunk of chunks) {
+            const numbers = chunk.map(
+              (row) => row.querySelector("td").innerText
+            );
+
+            chunk.forEach((row) => {
+              const statusRef = row.querySelector("td:nth-child(2) > span");
+              statusRef.style = "color: white; background: #60a5fa;";
+              statusRef.innerText = "sending...";
+            });
+
+            try {
+              const res = await fetch("/ping", {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "application/json"
+                },
+                method: "POST",
+                body: JSON.stringify({
+                  message: msg,
+                  numbers
+                })
+              });
+              if (res.status !== 200) throw new Error(await res.text());
+              chunk.forEach((row) => {
+                const statusRef = row.querySelector("td:nth-child(2) > span");
+                statusRef.style = "color: white; background:  #4ade80;";
+                statusRef.innerText = "sended";
+              });
+            } catch (err) {
+              chunk.forEach((row) => {
+                const statusRef = row.querySelector("td:nth-child(2) > span");
+                statusRef.style = "color: white; background: #f87171;";
+                statusRef.innerText = "failed";
+              });
+              console.error(err);
+            }
+
+            delay(Math.random() * 2000);
+          }
+        })();
       }
     </script>
   </body>
