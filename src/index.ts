@@ -15,7 +15,7 @@ app.set("view engine", "ejs");
 app.use(cors({ origin: "*" }));
 app.use(express.static("public"));
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "20mb" }));
 app.use(homeRoute);
 app.use(pingRoute);
 

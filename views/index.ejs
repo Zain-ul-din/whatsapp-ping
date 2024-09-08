@@ -50,6 +50,7 @@
             >Enter your Token:</label
           >
           <input
+            required
             type="text"
             id="token"
             placeholder="Your token here"
@@ -65,6 +66,7 @@
             >Upload CSV File:</label
           >
           <input
+            required
             type="file"
             id="csv-file"
             accept=".csv"
@@ -87,6 +89,7 @@ phone_number
         <!-- Message Input -->
         <div class="flex flex-col">
           <label
+            required
             for="message"
             class="text-lg font-semibold mb-2 text-foreground"
             >Compose Your Message:</label
@@ -97,6 +100,20 @@ phone_number
             placeholder="Type your message here..."
             class="p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
           ></textarea>
+        </div>
+
+        <div class="flex flex-col">
+          <label
+            for="csv-file"
+            class="text-lg font-semibold mb-2 text-foreground"
+            >Attach Image (Optional):</label
+          >
+          <input
+            type="file"
+            id="image"
+            accept="image/*"
+            class="p-3 border border-border rounded-lg"
+          />
         </div>
 
         <!-- Send Button -->
@@ -200,6 +217,21 @@ phone_number
           const token = document.querySelector("#token").value;
           const msg = document.querySelector("#message").value;
 
+          const imgFile = document.querySelector("#image");
+          let base64Img = undefined;
+
+          if (imgFile.files.length > 0) {
+            await new Promise((resolve) => {
+              const file = imgFile.files[0];
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                base64Img = reader.result.split(",")[1];
+                resolve();
+              };
+              reader.readAsDataURL(file);
+            });
+          }
+
           for (let chunk of chunks) {
             const numbers = chunk.map(
               (row) => row.querySelector("td").innerText
@@ -220,7 +252,8 @@ phone_number
                 method: "POST",
                 body: JSON.stringify({
                   message: msg,
-                  numbers
+                  numbers,
+                  ...(base64Img ? { image: base64Img } : {})
                 })
               });
               if (res.status !== 200) throw new Error(await res.text());

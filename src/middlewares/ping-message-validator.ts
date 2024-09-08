@@ -15,7 +15,8 @@ const pingMessageSchema = z.object({
           "Invalid phone number format. Correct example: 123456789012"
         )
     )
-    .max(5, "You can provide a maximum of 5 phone numbers")
+    .max(5, "You can provide a maximum of 5 phone numbers"),
+  image: z.string().optional()
 });
 
 const validatePingMessage = (
