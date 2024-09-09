@@ -105,6 +105,35 @@ fetch("http://localhost:8080/ping", {
 
 <br>
 
+## Sponsors:
+
+A big thank you to these people for supporting this project.
+
+<table>
+ <thead>
+  <tr>
+   <th>
+    <img src="https://avatars.githubusercontent.com/u/97310455?v=4" width="150" height="150" />
+   </th>
+   <th>
+    <img src="https://avatars.githubusercontent.com/u/0?v=4" width="150" height="150"/>
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+   <tr>
+    <td align="center">
+     <a target="_blank" href="https://github.com/levitco">Ahtisham Abbas Qureshi</a>
+    </td>
+    <td align="center">
+    <a target="_blank" href="https://www.buymeacoffee.com/zainuldin">YOU?</a>
+    </td>
+   </tr>
+ </tbody>
+</table>
+
+
+
 #### Thanks to These Awesome Projects:
 
 - [@whiskeysockets/baileys](https://www.npmjs.com/package/@whiskeysockets/baileys)
