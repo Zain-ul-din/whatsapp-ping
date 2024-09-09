@@ -105,7 +105,7 @@ fetch("http://localhost:8080/ping", {
 
 <br>
 
-## Sponsors:
+## 😻 Sponsors
 
 A big thank you to these people for supporting this project.
 
