@@ -41,7 +41,7 @@ func downloadFile(filepath string, url string) (err error) {
 }
 
 func install_nodejs() {
-	node_js_url := "https://nodejs.org/dist/v18.17.1/node-v18.17.1-x64.msi"
+	node_js_url := "https://nodejs.org/dist/v20.17.0/node-v20.17.0-x64.msi"
 	download_res := downloadFile("node-setup.msi", node_js_url)
 	if download_res == nil {
 		println("Error: NodeJs Installation Failed")
