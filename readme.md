@@ -39,6 +39,13 @@ you need two env's to make this work
 ```env
 API_KEY=YOUR_API_KEY
 MONGO_URL=your_url
+
+# optional
+
+SELF_HOSTED=boolean -> set to true if running in self-hosted environment
+LOCAL=boolean -> for development purposes
+NEXT_MSG_DELAY=number > delays between next message 
+
 ```
 
 We use `api-key` for authentication you can use any key you like to use but we recommend using strong key that is not vulnerable to `brute-force` attack.
