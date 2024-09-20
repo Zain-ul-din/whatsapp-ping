@@ -34,7 +34,7 @@ pnpm i
 
 **Prepare environment variables:**
 
-you need two env's to make this work
+you need two env variables to make this work
 
 ```env
 API_KEY=YOUR_API_KEY
