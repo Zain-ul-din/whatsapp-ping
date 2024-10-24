@@ -8,7 +8,7 @@ const limiter = rateLimit({
   windowMs: 1000,
   limit: 5,
   standardHeaders: "draft-7",
-  legacyHeaders: false,
+  legacyHeaders: false
 });
 
 const route = express.Router();

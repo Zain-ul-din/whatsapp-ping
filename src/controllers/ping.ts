@@ -25,7 +25,7 @@ const pingController = async (req: Request, res: Response): Promise<void> => {
     } else {
       await waClient.sendMessage(id, { text: message });
     }
-    await delay(parseInt(process.env.NEXT_MSG_DELAY || "100"));
+    await delay(100 * Math.random());
   }
   res.status(200).send("success");
 };
