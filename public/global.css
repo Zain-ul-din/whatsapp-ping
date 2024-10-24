@@ -636,16 +636,16 @@ h1,
   display: none;
 }
 
-.h-\[320px\] {
-  height: 320px;
+.h-\[302px\] {
+  height: 302px;
 }
 
 .h-screen {
   height: 100vh;
 }
 
-.w-\[320px\] {
-  width: 320px;
+.w-\[302px\] {
+  width: 302px;
 }
 
 .w-full {
@@ -747,6 +747,11 @@ h1,
   font-weight: 600;
 }
 
+.text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity));
+}
+
 .text-gray-800 {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
@@ -762,9 +767,9 @@ h1,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-blue-400 {
+.text-green-400 {
   --tw-text-opacity: 1;
-  color: rgb(96 165 250 / var(--tw-text-opacity));
+  color: rgb(74 222 128 / var(--tw-text-opacity));
 }
 
 .shadow-sm {

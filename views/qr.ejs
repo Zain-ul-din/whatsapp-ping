@@ -14,12 +14,16 @@
         class="charming-header border rounded-b-lg flex flex-col justify-center items-center shadow-sm w-full max-w-md p-6"
       >
         <input id="qr_code" value="<%= qr %>" hidden />
-        <div id="qrcode" class="w-[320px] h-[320px] my-auto mx-auto"></div>
+        <div id="qrcode" class="w-[302px] h-[302px] my-auto mx-auto"></div>
 
         <% if (qr.length == 0) { %>
         <p class="text-blue-400 text-balance font-medium border-t pt-2">
           QR code generation is still in progress; please wait a minute and try
           again.
+        </p>
+        <% } else { %>
+        <p class="text-green-400 text-balance font-medium border-t pt-2">
+          Use your phone to scan the QR code.
         </p>
         <% } %>
       </div>
