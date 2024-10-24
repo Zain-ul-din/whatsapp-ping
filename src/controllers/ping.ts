@@ -1,33 +1,26 @@
 import { Request, Response } from "express";
-import { connectToWhatsApp } from "../baileys";
 import { delay } from "../lib/delay";
-import AsyncReturnType from "../types/AsyncReturnType";
-
-type WaClientType = AsyncReturnType<typeof connectToWhatsApp>;
-let waClient: WaClientType;
-
-if (process.env.SELF_HOSTED || process.env.LOCAL) {
-  (async () => {
-    waClient = await connectToWhatsApp();
-  })();
-}
 
 const pingController = async (req: Request, res: Response): Promise<void> => {
-  if (!waClient) {
-    waClient = await connectToWhatsApp();
+  if (global.waSock == null) {
+    res.status(500).send({ error: "WA is not connected" });
+    return;
   }
   const { message, numbers, image } = req.body;
   for (let number of numbers) {
     const id = `${number}@s.whatsapp.net`;
     if (image) {
       const imgToBase64 = Buffer.from(image, "base64");
-      await waClient.sendMessage(id, { image: imgToBase64, caption: message });
+      await global.waSock.sendMessage(id, {
+        image: imgToBase64,
+        caption: message
+      });
     } else {
-      await waClient.sendMessage(id, { text: message });
+      await global.waSock.sendMessage(id, { text: message });
     }
     await delay(100 * Math.random());
   }
-  res.status(200).send("success");
+  res.status(200).send({ message: "success" });
 };
 
 export default pingController;

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scan Qr - Whats App Ping</title>
+    <link href="/global.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  </head>
+  <body>
+    <main class="h-screen flex flex-col items-center justify-center">
+      <div
+        class="charming-header border rounded-b-lg flex flex-col justify-center items-center shadow-sm w-full max-w-md p-6"
+      >
+        <input id="qr_code" value="<%= qr %>" hidden />
+        <div id="qrcode" class="w-[320px] h-[320px] my-auto mx-auto"></div>
+
+        <% if (qr.length == 0) { %>
+        <p class="text-blue-400 text-balance font-medium border-t pt-2">
+          QR code generation is still in progress; please wait a minute and try
+          again.
+        </p>
+        <% } %>
+      </div>
+    </main>
+
+    <script>
+      var qrcode = new QRCode("qrcode");
+
+      function makeCode() {
+        var elText = document.getElementById("qr_code");
+
+        if (!elText.value) return;
+
+        qrcode.makeCode(elText.value);
+      }
+
+      makeCode();
+    </script>
+  </body>
+</html>

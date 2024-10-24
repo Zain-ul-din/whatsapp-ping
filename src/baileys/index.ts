@@ -7,7 +7,7 @@ import * as fs from "fs";
 import { connectDB } from "./db";
 import { useMongoDBAuthState } from "mongo-baileys";
 
-async function connectToWhatsApp() {
+async function connectToWhatsApp(onStart?: () => void) {
   const { state, saveCreds } = process.env.MONGO_URL
     ? await useMongoDBAuthState((await connectDB()).collection as any)
     : await useMultiFileAuthState("auth_info_baileys");
@@ -27,10 +27,11 @@ async function connectToWhatsApp() {
 
   const setupAuth = new Promise(async (resolve, rej) => {
     sock.ev.on("connection.update", (update) => {
-      const { connection, lastDisconnect } = update;
-
+      const { connection, lastDisconnect, qr } = update;
+      global.waQrCode = qr || null;
       try {
         if (connection === "close" && lastDisconnect) {
+          const statusCode = (lastDisconnect.error as Boom)?.output?.statusCode;
           const shouldReconnect =
             (lastDisconnect.error as Boom)?.output?.statusCode !==
             DisconnectReason.loggedOut;
@@ -38,6 +39,8 @@ async function connectToWhatsApp() {
           console.log(
             "connection closed due to ",
             lastDisconnect.error,
+            ", status code: ",
+            statusCode,
             ", reconnecting ",
             shouldReconnect
           );
@@ -47,14 +50,16 @@ async function connectToWhatsApp() {
           } else {
             // clear credentials
             if (lastDisconnect.error) {
-              fs.rmSync("./auth_info_baileys", {
-                force: true,
-                recursive: true
-              });
+              if (fs.existsSync("./auth_info_baileys")) {
+                fs.rmSync("./auth_info_baileys", {
+                  force: true,
+                  recursive: true
+                });
+              }
             }
           }
         } else if (connection === "open") {
-          console.log("opened connection");
+          console.log("\n ✔ opened connection \n");
           resolve(null);
         }
       } catch (err) {
@@ -75,7 +80,7 @@ async function connectToWhatsApp() {
     )
   ]);
 
-  return sock;
+  global.waSock = sock;
 }
 
 // run in main file
