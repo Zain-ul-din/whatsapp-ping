@@ -26,9 +26,9 @@ app.use((_, res) => {
   res.status(404).json({ message: "Resource not found" });
 });
 
-// (async () => {
-//   await connectToWhatsApp();
-// })();
+(async () => {
+  await connectToWhatsApp();
+})();
 
 app.listen(PORT, () => {
   console.log(`server is listening on localhost:${PORT}`);
