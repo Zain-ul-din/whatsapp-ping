@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vite-node ./src/test/index.ts",
     "dev": "concurrently \"vite-node --watch src/index.ts\" \"npx tailwindcss -i ./public/input.css -o ./public/global.css --watch\"",
-    "start": "node ./dist/index.js",
+    "start": "pm2 start ./dist/index.js",
     "build": "tsc && tailwindcss -i ./public/input.css -o ./public/global.css"
   },
   "keywords": [
