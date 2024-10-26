@@ -28,6 +28,7 @@
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@whiskeysockets/baileys": "^6.7.9",
+    "@whiskeysockets/libsignal-node": "github:WhiskeySockets/libsignal-node",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
