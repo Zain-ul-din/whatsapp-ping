@@ -10,7 +10,10 @@ Catching messages on Gmail from clients always has me running late, and checking
 
 
 
-https://github.com/user-attachments/assets/04fda059-23f1-4e9b-ae6c-03c74bc2c85b
+
+
+https://github.com/user-attachments/assets/5735be0c-a388-40de-bcab-38ed4bd28281
+
 
 
 
