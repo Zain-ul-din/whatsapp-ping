@@ -104,6 +104,7 @@ fetch("http://localhost:8080/ping", {
   method: "POST",
   body: JSON.stringify({
     message: "hey",
+    image: "optional BASE64 image",
     numbers: ["<country_code_without_plus><...number>"]
   })
 })
