@@ -6,14 +6,16 @@ import { Boom } from "@hapi/boom";
 import * as fs from "fs";
 import { connectDB } from "./db";
 import { useMongoDBAuthState } from "mongo-baileys";
+import { updateConnectionStatus } from "../services/firestore";
 
 async function connectToWhatsApp(onStart?: () => void) {
   const { state, saveCreds } = process.env.MONGO_URL
     ? await useMongoDBAuthState((await connectDB()).collection as any)
     : await useMultiFileAuthState("auth_info_baileys");
 
+  await updateConnectionStatus({ loading: true, qrCode: "" });
+
   const sock = makeWASocket({
-    // can provide additional config here
     printQRInTerminal: true,
     mobile: false,
     keepAliveIntervalMs: 10000,
@@ -26,9 +28,15 @@ async function connectToWhatsApp(onStart?: () => void) {
   sock.ev.on("creds.update", saveCreds);
 
   const setupAuth = new Promise(async (resolve, rej) => {
-    sock.ev.on("connection.update", (update) => {
+    sock.ev.on("connection.update", async (update) => {
       const { connection, lastDisconnect, qr } = update;
-      global.waQrCode = qr || null;
+
+      global.waQrCode = qr || "";
+      await updateConnectionStatus({
+        loading: true,
+        qrCode: global.waQrCode
+      });
+
       try {
         if (connection === "close" && lastDisconnect) {
           const statusCode = (lastDisconnect.error as Boom)?.output?.statusCode;
@@ -36,7 +44,7 @@ async function connectToWhatsApp(onStart?: () => void) {
             (lastDisconnect.error as Boom)?.output?.statusCode !==
             DisconnectReason.loggedOut;
 
-          console.log(
+          console.error(
             "connection closed due to ",
             lastDisconnect.error,
             ", status code: ",
@@ -44,6 +52,7 @@ async function connectToWhatsApp(onStart?: () => void) {
             ", reconnecting ",
             shouldReconnect
           );
+
           // reconnect if not logged out
           if (shouldReconnect) {
             connectToWhatsApp();
@@ -59,7 +68,7 @@ async function connectToWhatsApp(onStart?: () => void) {
             }
           }
         } else if (connection === "open") {
-          console.log("\n ✔ opened connection \n");
+          console.info("\n ✔ opened connection \n");
           resolve(null);
         }
       } catch (err) {
@@ -83,5 +92,4 @@ async function connectToWhatsApp(onStart?: () => void) {
   global.waSock = sock;
 }
 
-// run in main file
 export { connectToWhatsApp };
