@@ -7,6 +7,7 @@ import * as fs from "fs";
 import { connectDB } from "./db";
 import { useMongoDBAuthState } from "mongo-baileys";
 import { updateConnectionStatus } from "../services/firestore";
+import { saveContacts } from "../services/api";
 
 async function connectToWhatsApp(onStart?: () => void) {
   const { state, saveCreds } = process.env.MONGO_URL
@@ -28,21 +29,34 @@ async function connectToWhatsApp(onStart?: () => void) {
   sock.ev.on("creds.update", saveCreds);
 
   // export numbers from all your previous individual conversations
-  sock.ev.on("messaging-history.set", (data) => {
+  sock.ev.on("messaging-history.set", async (data) => {
     const contacts = data.contacts;
     console.log(
       "messaging-history.set",
       JSON.stringify(contacts.slice(0, 10), null, 2),
       `total: ${contacts.length}`
     );
+    await saveContacts(contacts);
   });
 
-  sock.ev.on("contacts.upsert", (contacts) => {
+  sock.ev.on("contacts.update", async (contacts) => {
+    console.log(
+      "contacts.update",
+      JSON.stringify(contacts.slice(0, 10), null, 2),
+      `total: ${contacts.length}`
+    );
+    await saveContacts(
+      contacts.map((c) => ({ id: c.id, notify: c.notify, name: c.name }))
+    );
+  });
+
+  sock.ev.on("contacts.upsert", async (contacts) => {
     console.log(
       "contacts.upsert",
       JSON.stringify(contacts.slice(0, 10), null, 2),
       `total: ${contacts.length}`
     );
+    await saveContacts(contacts);
   });
 
   const setupAuth = new Promise(async (resolve, rej) => {
@@ -51,7 +65,8 @@ async function connectToWhatsApp(onStart?: () => void) {
 
       global.waQrCode = qr || "";
       await updateConnectionStatus({
-        loading: true,
+        loading: false,
+        connected: false,
         qrCode: global.waQrCode
       });
 
@@ -73,7 +88,7 @@ async function connectToWhatsApp(onStart?: () => void) {
 
           // reconnect if not logged out
           if (shouldReconnect) {
-            connectToWhatsApp();
+            await connectToWhatsApp();
           } else {
             // clear credentials
             if (lastDisconnect.error) {
@@ -83,11 +98,31 @@ async function connectToWhatsApp(onStart?: () => void) {
                   recursive: true
                 });
               }
+              await updateConnectionStatus({
+                connected: false,
+                qrCode: "",
+                loading: true
+              });
+              await connectToWhatsApp();
             }
           }
         } else if (connection === "open") {
-          console.info("\n ✔ opened connection \n");
+          // connected user info
+          console.info(
+            "\n ✔ opened connection \n",
+            JSON.stringify(sock.user, null, 2)
+          );
+
+          await updateConnectionStatus({
+            connected: true,
+            qrCode: qr ?? "",
+            loading: false,
+            user: sock.user
+          });
+
           resolve(null);
+        } else if (connection === "close") {
+          console.info("\n↖ user log out ");
         }
       } catch (err) {
         console.log(err);
