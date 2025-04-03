@@ -27,6 +27,24 @@ async function connectToWhatsApp(onStart?: () => void) {
 
   sock.ev.on("creds.update", saveCreds);
 
+  // export numbers from all your previous individual conversations
+  sock.ev.on("messaging-history.set", (data) => {
+    const contacts = data.contacts;
+    console.log(
+      "messaging-history.set",
+      JSON.stringify(contacts.slice(0, 10), null, 2),
+      `total: ${contacts.length}`
+    );
+  });
+
+  sock.ev.on("contacts.upsert", (contacts) => {
+    console.log(
+      "contacts.upsert",
+      JSON.stringify(contacts.slice(0, 10), null, 2),
+      `total: ${contacts.length}`
+    );
+  });
+
   const setupAuth = new Promise(async (resolve, rej) => {
     sock.ev.on("connection.update", async (update) => {
       const { connection, lastDisconnect, qr } = update;

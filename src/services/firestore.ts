@@ -3,7 +3,7 @@ import { collections } from "../lib/firebase";
 import { BaileysConnectionStatus } from "../types/BaileysConnectionStatus";
 
 export async function updateConnectionStatus(status: BaileysConnectionStatus) {
-  const docRef = doc(collections.users, process.env.USER_ID);
+  const docRef = doc(collections.users, process.env.TENANT_ID);
   try {
     await setDoc(
       docRef,
