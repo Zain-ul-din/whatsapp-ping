@@ -8,6 +8,7 @@ import { connectDB } from "./db";
 import { useMongoDBAuthState } from "mongo-baileys";
 import { updateConnectionStatus } from "../services/firestore";
 import { saveContacts } from "../services/api";
+import { socket } from "../services/socket-io";
 
 async function connectToWhatsApp(onStart?: () => void) {
   const { state, saveCreds } = process.env.MONGO_URL
