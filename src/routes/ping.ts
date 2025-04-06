@@ -6,7 +6,7 @@ import authentication from "../middlewares/api-key-authentication";
 
 const limiter = rateLimit({
   windowMs: 1000,
-  limit: 5,
+  limit: 100,
   standardHeaders: "draft-7",
   legacyHeaders: false
 });

@@ -1,20 +1,18 @@
 import { Request, Response } from "express";
+import { apiResponseData, apiResponseError } from "../constants/api-responses";
 
 export const homeController = (req: Request, res: Response) => {
-  res.render("index");
-};
-
-export const getQrCodeController = (req: Request, res: Response) => {
-  const apiKey = req.body.api_key;
-
-  if (apiKey != process.env.API_KEY) {
-    res.render("error", { message: "Invalid Credentials" });
-    return;
+  if (!global.waSock) {
+    return res
+      .status(425)
+      .json(apiResponseError("Still Connecting to WhatsApp"));
   }
 
-  if (global.waQrCode) {
-    res.render("qr", { qr: global.waQrCode });
-  } else {
-    res.render("qr", { qr: "" });
-  }
+  res.status(200).json(
+    apiResponseData({
+      qrCode: global.waQrCode,
+      user: global.waSock.user,
+      connected: Boolean(global.waSock.user)
+    })
+  );
 };

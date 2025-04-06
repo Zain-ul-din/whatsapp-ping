@@ -8,7 +8,6 @@ import { connectDB } from "./db";
 import { useMongoDBAuthState } from "mongo-baileys";
 import { updateConnectionStatus } from "../services/socket-io";
 import { saveContacts } from "../services/api";
-import { socket } from "../services/socket-io";
 
 async function connectToWhatsApp(onStart?: () => void) {
   const { state, saveCreds } = process.env.MONGO_URL
@@ -17,7 +16,7 @@ async function connectToWhatsApp(onStart?: () => void) {
 
   await updateConnectionStatus({ loading: true, qrCode: "" });
 
-  const sock = makeWASocket({
+  global.waSock = makeWASocket({
     printQRInTerminal: true,
     mobile: false,
     keepAliveIntervalMs: 10000,
@@ -27,10 +26,10 @@ async function connectToWhatsApp(onStart?: () => void) {
     auth: state
   });
 
-  sock.ev.on("creds.update", saveCreds);
+  global.waSock.ev.on("creds.update", saveCreds);
 
   // export numbers from all your previous individual conversations
-  sock.ev.on("messaging-history.set", async (data) => {
+  global.waSock.ev.on("messaging-history.set", async (data) => {
     const contacts = data.contacts;
     console.log(
       "messaging-history.set",
@@ -40,7 +39,7 @@ async function connectToWhatsApp(onStart?: () => void) {
     await saveContacts(contacts);
   });
 
-  sock.ev.on("contacts.update", async (contacts) => {
+  global.waSock.ev.on("contacts.update", async (contacts) => {
     console.log(
       "contacts.update",
       JSON.stringify(contacts.slice(0, 10), null, 2),
@@ -51,7 +50,7 @@ async function connectToWhatsApp(onStart?: () => void) {
     );
   });
 
-  sock.ev.on("contacts.upsert", async (contacts) => {
+  global.waSock.ev.on("contacts.upsert", async (contacts) => {
     console.log(
       "contacts.upsert",
       JSON.stringify(contacts.slice(0, 10), null, 2),
@@ -61,7 +60,11 @@ async function connectToWhatsApp(onStart?: () => void) {
   });
 
   const setupAuth = new Promise(async (resolve, rej) => {
-    sock.ev.on("connection.update", async (update) => {
+    if (!global.waSock) return;
+
+    global.waSock.ev.on("connection.update", async (update) => {
+      if (!global.waSock) return;
+
       const { connection, lastDisconnect, qr } = update;
 
       global.waQrCode = qr || "";
@@ -111,14 +114,14 @@ async function connectToWhatsApp(onStart?: () => void) {
           // connected user info
           console.info(
             "\n ✔ opened connection \n",
-            JSON.stringify(sock.user, null, 2)
+            JSON.stringify(global.waSock.user, null, 2)
           );
 
           await updateConnectionStatus({
             connected: true,
             qrCode: qr ?? "",
             loading: false,
-            user: sock.user
+            user: global.waSock.user
           });
 
           resolve(null);
@@ -142,8 +145,6 @@ async function connectToWhatsApp(onStart?: () => void) {
       )
     )
   ]);
-
-  global.waSock = sock;
 }
 
 export { connectToWhatsApp };
