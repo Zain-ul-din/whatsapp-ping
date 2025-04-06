@@ -10,11 +10,7 @@ const PORT = process.env.PORT || 8080;
 
 dotenv.config();
 
-app.set("views", "./views");
-app.set("view engine", "ejs");
-
 app.use(cors({ origin: "*" }));
-app.use(express.static("public"));
 
 app.use(bodyParser.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true }));
