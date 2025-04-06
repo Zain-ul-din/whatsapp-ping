@@ -6,7 +6,7 @@ import { Boom } from "@hapi/boom";
 import * as fs from "fs";
 import { connectDB } from "./db";
 import { useMongoDBAuthState } from "mongo-baileys";
-import { updateConnectionStatus } from "../services/firestore";
+import { updateConnectionStatus } from "../services/socket-io";
 import { saveContacts } from "../services/api";
 import { socket } from "../services/socket-io";
 
