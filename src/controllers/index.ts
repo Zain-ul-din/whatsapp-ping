@@ -1,4 +1,4 @@
 import pingController from "./ping";
-import { getQrCodeController, homeController } from "./home";
+import { homeController } from "./home";
 
-export { pingController, homeController, getQrCodeController };
+export { pingController, homeController };
