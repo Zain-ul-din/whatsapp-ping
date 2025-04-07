@@ -100,7 +100,7 @@ async function connectToWhatsApp(onStart?: () => void) {
     });
   });
 
-  const FIVE_MIN_IN_MS = 1000 * 10; //* 60 * 5;
+  const FIVE_MIN_IN_MS = 1000 * 60 * 5;
 
   const closeConnection = async () => {
     console.info("🔃 Going to close Whatsapp connection");
