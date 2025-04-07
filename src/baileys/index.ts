@@ -100,16 +100,25 @@ async function connectToWhatsApp(onStart?: () => void) {
     });
   });
 
-  const FIVE_MIN_IN_MS = 1000 * 60 * 5;
+  const FIVE_MIN_IN_MS = 1000 * 10; //* 60 * 5;
+
+  const closeConnection = async () => {
+    console.info("🔃 Going to close Whatsapp connection");
+    global.waSock?.logout("Programmatically closing timeout connection");
+    console.info("✔ Done closing Whatsapp connection");
+  };
+
+  process.on("SIGTERM", closeConnection);
+  process.on("SIGINT", closeConnection);
 
   await Promise.race([
     setupAuth,
-    new Promise((_, rej) =>
-      setTimeout(
-        () => rej("Timeout while setting up connection to whatsapp"),
-        FIVE_MIN_IN_MS
-      )
-    )
+    new Promise((_, rej) => {
+      setTimeout(async () => {
+        await closeConnection();
+        rej("Timeout while setting up connection to whatsapp");
+      }, FIVE_MIN_IN_MS);
+    })
   ]);
 }
 
