@@ -4,7 +4,6 @@ import authentication from "../middlewares/api-key-authentication";
 
 const router = express.Router();
 
-router.use(authentication);
-router.get("/", homeController);
+router.get("/", authentication, homeController);
 
 export default router;
