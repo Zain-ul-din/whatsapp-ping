@@ -15,6 +15,6 @@ const route = express.Router();
 
 route.use(limiter);
 route.use(authentication);
-route.post("/ping", validatePingMessage, pingController);
+route.post("/", validatePingMessage, pingController);
 
 export default route;

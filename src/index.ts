@@ -1,5 +1,5 @@
 import express from "express";
-import { homeRoute, pingRoute } from "./routes";
+import routes from "./routes";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -11,12 +11,10 @@ const PORT = process.env.PORT || 8080;
 dotenv.config();
 
 app.use(cors({ origin: "*" }));
-
 app.use(bodyParser.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-app.use(homeRoute);
-app.use(pingRoute);
+routes(app);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Resource not found" });
