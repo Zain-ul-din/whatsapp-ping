@@ -6,15 +6,12 @@ import { Boom } from "@hapi/boom";
 import * as fs from "fs";
 import { connectDB } from "./db";
 import { useMongoDBAuthState } from "mongo-baileys";
-import { updateConnectionStatus } from "../services/socket-io";
 import { saveContacts } from "../services/api";
 
 async function connectToWhatsApp(onStart?: () => void) {
   const { state, saveCreds } = process.env.MONGO_URL
     ? await useMongoDBAuthState((await connectDB()).collection as any)
     : await useMultiFileAuthState("auth_info_baileys");
-
-  await updateConnectionStatus({ loading: true, qrCode: "" });
 
   global.waSock = makeWASocket({
     printQRInTerminal: true,
@@ -31,31 +28,16 @@ async function connectToWhatsApp(onStart?: () => void) {
   // export numbers from all your previous individual conversations
   global.waSock.ev.on("messaging-history.set", async (data) => {
     const contacts = data.contacts;
-    console.log(
-      "messaging-history.set",
-      JSON.stringify(contacts.slice(0, 10), null, 2),
-      `total: ${contacts.length}`
-    );
     await saveContacts(contacts);
   });
 
   global.waSock.ev.on("contacts.update", async (contacts) => {
-    console.log(
-      "contacts.update",
-      JSON.stringify(contacts.slice(0, 10), null, 2),
-      `total: ${contacts.length}`
-    );
     await saveContacts(
       contacts.map((c) => ({ id: c.id, notify: c.notify, name: c.name }))
     );
   });
 
   global.waSock.ev.on("contacts.upsert", async (contacts) => {
-    console.log(
-      "contacts.upsert",
-      JSON.stringify(contacts.slice(0, 10), null, 2),
-      `total: ${contacts.length}`
-    );
     await saveContacts(contacts);
   });
 
@@ -68,11 +50,6 @@ async function connectToWhatsApp(onStart?: () => void) {
       const { connection, lastDisconnect, qr } = update;
 
       global.waQrCode = qr || "";
-      await updateConnectionStatus({
-        loading: false,
-        connected: false,
-        qrCode: global.waQrCode
-      });
 
       try {
         if (connection === "close" && lastDisconnect) {
@@ -102,11 +79,7 @@ async function connectToWhatsApp(onStart?: () => void) {
                   recursive: true
                 });
               }
-              await updateConnectionStatus({
-                connected: false,
-                qrCode: "",
-                loading: true
-              });
+
               await connectToWhatsApp();
             }
           }
@@ -116,13 +89,6 @@ async function connectToWhatsApp(onStart?: () => void) {
             "\n ✔ opened connection \n",
             JSON.stringify(global.waSock.user, null, 2)
           );
-
-          await updateConnectionStatus({
-            connected: true,
-            qrCode: qr ?? "",
-            loading: false,
-            user: global.waSock.user
-          });
 
           resolve(null);
         } else if (connection === "close") {
