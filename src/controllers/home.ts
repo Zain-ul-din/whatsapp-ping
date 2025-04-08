@@ -3,9 +3,11 @@ import { apiResponseData, apiResponseError } from "../constants/api-responses";
 
 export const homeController = (req: Request, res: Response) => {
   if (!global.waSock) {
-    return res
-      .status(425)
-      .json(apiResponseError("Still Connecting to WhatsApp"));
+    return res.status(200).json(
+      apiResponseData({
+        connecting: true
+      })
+    );
   }
 
   res.status(200).json(
