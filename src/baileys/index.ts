@@ -111,19 +111,17 @@ async function connectToWhatsApp(onStart?: () => void) {
   process.on("SIGTERM", closeConnection);
   process.on("SIGINT", closeConnection);
 
-  let timeout: NodeJS.Timeout = undefined!;
-
   await Promise.race([
     setupAuth,
     new Promise((_, rej) => {
-      timeout = setTimeout(async () => {
+      setTimeout(async () => {
         await closeConnection();
+        if (global.waSock && global.waSock.user) return;
         rej("Timeout while setting up connection to whatsapp");
       }, FIVE_MIN_IN_MS);
     })
   ]);
 
-  clearTimeout(timeout);
   console.log("✔ DONE! connected with WhatsApp");
 }
 
