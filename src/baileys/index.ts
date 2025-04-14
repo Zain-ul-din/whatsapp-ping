@@ -108,15 +108,15 @@ async function connectToWhatsApp(onStart?: () => void) {
     console.info("✔ Done closing Whatsapp connection");
   };
 
-  process.on("SIGTERM", closeConnection);
-  process.on("SIGINT", closeConnection);
+  // process.on("SIGTERM", closeConnection);
+  // process.on("SIGINT", closeConnection);
 
   await Promise.race([
     setupAuth,
     new Promise((_, rej) => {
       setTimeout(async () => {
-        await closeConnection();
         if (global.waSock && global.waSock.user) return;
+        await closeConnection();
         rej("Timeout while setting up connection to whatsapp");
       }, FIVE_MIN_IN_MS);
     })
